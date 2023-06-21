@@ -1,6 +1,7 @@
 <?php
   ## ABRE UMA VARIAVEL DE SESSÃO
   session_start();
+  $nomeusuario;
 
   # SOLICITA O ARQUIVO CONECTADB
   include("conectadb.php");
@@ -11,8 +12,9 @@
     $senha = $_POST['senha'];
     
     #QUERY DE BANCO DE DADOS 
-    $sql = "SELECT COUNT (usu_id) FROM usuarios WHERE usu_nome = '$nome' AND usu_senha ='$senha'";
-    $retorno = mysqli_query($link,$sql);
+    $sql = "SELECT COUNT(usu_id) FROM usuarios WHERE usu_nome = '$nome' AND usu_senha = '$senha'";
+
+        $retorno = mysqli_query($link, $sql);
 
     #RETORNO DE BANCO É RETORNADO EM ARRAY EM PHP
     while($tbl = mysqli_fetch_array($retorno))
@@ -25,15 +27,17 @@
 
     if($cont == 1)
     {
-        $sql = " SELECT *FROM usuarios WHERE usu_nome = '$nome' AND usu_senha = '$senha' AND usu_ativo = 's'";
+        
+        $sql = " SELECT *FROM usuarios WHERE usu_nome = '$nome' AND usu_senha = '$senha' AND usu_ativo = 's' ";
+
+        $_SESSION['$nomeusuario'] = $nome;
+
         echo"<script>window.location.href='admhome.php';</script>";
     
     }
     else{
         echo"<script>window.alert('USUARIO OU SENHA INCORRETO');</script>";
-        if(LOG_ALERT >= 5 ){
-        echo"<script>window.alert('Sai fora haker');</script>";
-    }
+        
     }
   }
 ?>
@@ -48,10 +52,10 @@
 <body>
     <form action="login.php" method="post">
         <h1>LOGIN DE USUARIO</h1>
-        <input type="text" name="nome" placeholder="NOME">
+        <input type="text" name="nome" placeholder="NOME" required >
         <P></P>
-        <input type="password" name="senha" placeholder="SENHA">
-        <p><a href="#">Esqueci minha senha!</a></p>
+        <input type="password" name="senha" placeholder="SENHA" required >
+        <p><a href="./recuperarsenha.php">Esqueci minha senha!</a></p>
         <input type="submit" name = "login" value="Login">
     </form>
 </body>
