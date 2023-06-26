@@ -6,7 +6,7 @@ html{
   list-style-type: none; /* Remove os marcadores de lista */
   margin: 0;
   padding: 0;
-  background-color: hwb(0 95% 5%); /* Define a cor de fundo do menu */
+  background-color: hwb(286 7% 20%); /* Define a cor de fundo do menu */
   border-radius: 10px;
 }
 
@@ -23,7 +23,7 @@ html{
 
 .menu li a:hover {
   background-color: #550469; /* Define a cor de fundo ao passar o mouse sobre os links */
-  color: #fff; /* Define a cor do texto ao passar o mouse sobre os links */
+  color: #a914e4; /* Define a cor do texto ao passar o mouse sobre os links */
   border-radius: 10px;
 }
 

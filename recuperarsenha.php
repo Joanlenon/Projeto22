@@ -68,7 +68,7 @@ function sendPasswordResetEmail($username, $token) {
     <title>Recuperar Senha</title>
 </head>
 <body>
-    <form action="recuperar_senha.php" method="get">
+    <form action="recuperar_senha.php" method="post">
         <h1>RECUPERAR SENHA</h1>
         <input type="text" name="nome" placeholder="Nome de Usuário" required>
         <input type="submit" name="submit" value="Recuperar Senha">
