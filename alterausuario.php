@@ -9,6 +9,7 @@ $sql = "SELECT * FROM usuarios WHERE usu_id = '$id'";
 $retorno = mysqli_query($link, $sql);
 
 while ($tbl = mysqli_fetch_array($retorno)) {
+    $id =$tbl['usu_id'];
     $nome = $tbl['usu_nome'];
     $senha = $tbl['usu_senha'];
     $ativo = $tbl['usu_ativo'];
@@ -44,7 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <ul class="menu">
             <li><a href="cadastrousuario.php">CADASTRA USUÁRIO</a></li>
             <li><a href="listausuario.php">LISTA USUÁRIO</a></li>
-            <li><a href="cadastroproduto.php">CADASTRA PRODUTO</a></li>
+            <li><a href="cadastraproduto.php">CADASTRA PRODUTO</a></li>
+            <li><a href="cadastracliente.php">CADASTRA CLIENTES</a></li>
             <li><a href="listaproduto.php">LISTA PRODUTO</a></li>
             <li><a href="listacliente.php">LISTA CLIENTE</a></li>
             <li class="menuloja"><a href="./areacliente/loja.php">LOJA</a></li>

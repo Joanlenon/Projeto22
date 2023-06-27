@@ -17,7 +17,7 @@ while($tbl = mysqli_fetch_array($retorno))
 }
 if($cont ==1)
 {
-    echo"<script>window.alaert('USUARIO JÁ EXISTE');</script>";
+    echo"<script>window.alert('USUARIO JÁ EXISTE');</script>";
 }else
 {
     $sql = "INSERT INTO usuarios (usu_nome, usu_senha, usu_ativo)
@@ -42,7 +42,8 @@ if($cont ==1)
         <ul class="menu">
             <li><a href="cadastrousuario.php">CADASTRA USUÁRIO</a></li>
             <li><a href="listausuario.php">LISTA USUÁRIO</a></li>
-            <li><a href="cadastroproduto.php">CADASTRA PRODUTO</a></li>
+            <li><a href="cadastraproduto.php">CADASTRA PRODUTO</a></li>
+            <li><a href="cadastracliente.php">CADASTRA CLIENTES</a></li>
             <li><a href="listaproduto.php">LISTA PRODUTO</a></li>
             <li><a href="listacliente.php">LISTA CLIENTE</a></li>
             <li class = "menuloja"><a href="./areacliente/loja.php">LOJA</a></li>
