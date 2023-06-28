@@ -4,42 +4,47 @@ include("conectadb.php");
 session_start();
 $nomeusuario = $_SESSION['nomeusuario'];
 
+#TRAZ DADOS DO BANCO PARA COMPLETAR OS CAMPOS
 $id = $_GET['id'];
-$sql = "SELECT * FROM clientes WHERE cli_id = '$id'";
+$sql = "SELECT * FROM clientes WHERE cli_id= '$id'";
 $retorno = mysqli_query($link, $sql);
 
+#PREENCHA O ARRAY SEMPRE
 while ($tbl = mysqli_fetch_array($retorno)) {
-    $nome = $tbl['cli_nome'];
-    $senha = $tbl['cli_senha'];
-    $cpf = $tbl['cli_cpf'];
-    $datansc = $tbl['cli_datansc'];
-    $telefone = $tbl['cli_telefone'];
-    $logradouro = $tbl['cli_logradouro'];
-    $numero = $tbl['cli_numero'];
-    $cidade= $tbl['cli_cidade'];
-    $ativo =$tbl['cli_ativo'];
+    $cpf = $tbl[1];
+    $nome = $tbl[2]; # CAMPO NOME DA TABELA DO BANCO
+    $senha = $tbl[3]; #CAMPO SENHA DA TABELA DO BANCO
+    $datanasc = $tbl[4]; #CAMPO ATIVO DA TABELA DO BANCO
+    $telefone = $tbl[5];
+    $logradouro = $tbl[6];
+    $numero = $tbl[7];
+    $cidade = $tbl[8];
+    $ativo = $tbl[9];
 
 }
 
+# USUÁRIO CLICA NO BOTÃO SALVAR
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-   
+    $id = $_POST['id'];
+    $cpf = $_POST['cpf'];
     $nome = $_POST['nome'];
     $senha = $_POST['senha'];
-    $cpf = $_POST['frmCpf'];
-    $datansc = $_POST['data'];
-    $telefone = $_POST['numero_telefone'];
+    $datanasc = $_POST['datanasc'];
+    $telefone = $_POST['telefone'];
     $logradouro = $_POST['logradouro'];
     $numero = $_POST['numero'];
     $cidade = $_POST['cidade'];
-    $ativo =$_POST['cli_ativo'];
-    $sql = "UPDATE clientes SET cli_nome = '$nome', cli_senha = '$senha',cli_cpf ='$cpf',cli_datansc = '$datansc',cli_telefone = '$logradouro'
-    ,cli_numero = '$numero',cli_cidade ='$cidade', cli_ativo = '$ativo' WHERE cli_id = '$id'";
+    $ativo = $_POST['ativo'];
+
+    $sql = "UPDATE clientes SET cli_cpf='$cpf', cli_nome = '$nome', cli_senha= '$senha', cli_datanasc='$datanasc', cli_telefone='$telefone', cli_logradouro='$logradouro', cli_numero= '$numero', cli_cidade='$cidade', cli_ativo= '$ativo' WHERE cli_id= $id";
+
     mysqli_query($link, $sql);
 
     echo "<script>window.alert('CLIENTE ALTERADO COM SUCESSO!');</script>";
     echo "<script>window.location.href='admhome.php';</script>";
-    exit();
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/estiloadm.css">
-    <title>Altera Cliente</title>
+    <title>ALTERA USUÁRIO</title>
 </head>
 
 <body>
@@ -57,38 +62,60 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <ul class="menu">
             <li><a href="cadastrausuario.php">CADASTRA USUÁRIO</a></li>
             <li><a href="listausuario.php">LISTA USUÁRIO</a></li>
-            <li><a href="cadastraproduto.php">CADASTRA PRODUTO</a></li>
-            <li><a href="cadastracliente.php">CADASTRA CLIENTES</a></li>
-            <li><a href="listaproduto.php">LISTA PRODUTO</a></li>
+            <li><a href="cadastracliente.php">CADASTRA CLIENTE</a></li>
             <li><a href="listacliente.php">LISTA CLIENTE</a></li>
-            <li class="menuloja"><a href="./areacliente/loja.php">LOJA</a></li>
+            <li class="menuloja"><a href="logout.php">SAIR</a></li>
         </ul>
     </div>
+
     <div>
         <form action="alteracliente.php" method="post">
+
             <input type="hidden" name="id" value="<?= $id ?>">
+
+            <br>
+
+            <input type="number" name="cpf" id="cpf" value="<?= $cpf ?>" required>
+
+            <br>
+
             <input type="text" name="nome" id="nome" value="<?= $nome ?>" required>
+
             <br>
+
             <input type="password" name="senha" id="senha" value="<?= $senha ?>" required>
+
             <br>
-            <input type="text" id="frmCpf" name="frmCpf" maxlength="11" size="11" placeholder="CPF" required>
+
+            <input type="date" name="datanasc" id="datanasc" value="<?= $datanasc ?>" required>
+
             <br>
-            <input type="date" name="data" id="data" placeholder="Data Nasc">
+
+            <input type="number" name="telefone" id="telefone" value="<?= $telefone ?>" required>
+
             <br>
-            <input type="text" name="numero_telefone" id="numero_telefone" placeholder="Número telefone">
+
+            <input type="text" name="logradouro" id="logradouro" value="<?= $logradouro ?>" required>
+
             <br>
-            <input type="text" name="logradouro" id="logradouro" placeholder="Logradouro">
+
+            <input type="text" name="numero" id="numero" value="<?= $numero ?>" required>
+
             <br>
-            <input type="number" name="numero" id="numero" placeholder="Número">
+
+            <input type="text" name="cidade" id="cidade" value="<?= $cidade ?>" required>
+
             <br>
-            <input type="text" name="cidade" id="cidade" placeholder="Cidade">
-            <br>
+
             <input type="radio" name="ativo" value="s" <?= $ativo == "s" ? "checked" : "" ?>>ATIVO
+
             <input type="radio" name="ativo" value="n" <?= $ativo == "n" ? "checked" : "" ?>>INATIVO
-            <br>
+            <p></P>
             <input type="submit" name="salvar" id="salvar" value="SALVAR">
+
         </form>
     </div>
+
 </body>
 
 </html>
