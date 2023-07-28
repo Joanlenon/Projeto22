@@ -1,12 +1,12 @@
 html{
-  background-color: hwb(295 14% 14%); /* Define a cor de fundo do menu */
+  background-color: hwb(214 2% 61%); /* Define a cor de fundo do menu */
 }
 
 .menu {
   list-style-type: none; /* Remove os marcadores de lista */
   margin: 0;
   padding: 0;
-  background-color: hwb(286 7% 20%); /* Define a cor de fundo do menu */
+  background-color: hwb(0 95% 5%); /* Define a cor de fundo do menu */
   border-radius: 10px;
 }
 
@@ -18,12 +18,12 @@ html{
   display: block; /* Define os links como elementos de bloco para ocuparem todo o espaço horizontal disponível */
   padding: 8px 16px; /* Adiciona espaçamento interno aos links */
   text-decoration: none; /* Remove a decoração de texto padrão (sublinhado) */
-  color: #333; /* Define a cor do texto dos links */
+  color: #414a96; /* Define a cor do texto dos links */
 }
 
 .menu li a:hover {
-  background-color: #550469; /* Define a cor de fundo ao passar o mouse sobre os links */
-  color: #a914e4; /* Define a cor do texto ao passar o mouse sobre os links */
+  background-color: #3459aa; /* Define a cor de fundo ao passar o mouse sobre os links */
+  color: #fff; /* Define a cor do texto ao passar o mouse sobre os links */
   border-radius: 10px;
 }
 
@@ -47,7 +47,7 @@ margin: 7px 5px 0 0;
 form{
   background-color: rgb(205, 191, 211);
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 10px rgba(20, 31, 185, 0.575);
   margin: 20px auto;
   padding: 20px;
   width: 300px;
@@ -56,10 +56,9 @@ form{
 input{
   background-color: rgb(205, 191, 211);
   border-radius: 3px;
-
 }
 
-input[type="text"],
+  input[type="text"],
   input[type="password"],
   input[type="number"],
   input[type="decimal"],
@@ -95,7 +94,7 @@ h2{
 }
 h1{
 
-  color: #0f2c47;
+  color: #2252b8;
 }
 p{
 

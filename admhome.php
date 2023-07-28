@@ -1,7 +1,6 @@
 <?php
-session_start();
-$nomeusuario =$_SESSION['nomeusuario']
-
+    session_start();
+    $nomeusuario = $_SESSION['nomeusuario'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -12,33 +11,31 @@ $nomeusuario =$_SESSION['nomeusuario']
     <title>MENU ADMINISTRATIVO</title>
 </head>
 <body>
-   <div>
+    <div>
         <ul class="menu">
-            <li><a href="cadastrousuario.php">CADASTRA USUÁRIO</a></li>
+            <li><a href="cadastrausuario.php">CADASTRA USUÁRIO</a></li>
             <li><a href="listausuario.php">LISTA USUÁRIO</a></li>
-            <li><a href="cadastroproduto.php">CADASTRA PRODUTO</a></li>
-            <li><a href="cadastroclientes.php">CADASTRA CLIENTES</a></li>
+            <li><a href="cadastraproduto.php">CADASTRA PRODUTO</a></li>
             <li><a href="listaproduto.php">LISTA PRODUTO</a></li>
+            <li><a href="cadastracliente.php">CADASTRA CLIENTE</a></li>
             <li><a href="listacliente.php">LISTA CLIENTE</a></li>
-            <li class = "menuloja"><a href="./logout.php">SAIR</a></li>
+            <li class="menuloja"><a href="logout.php">SAIR</a></li>
             <?php
-            #ABERTO PHP PARA VALIDAR SE A SESSÃO DO USSUARIO ESTÁ ABERTA SE NÃO FECHA O PHP PARA ELEMENTO HTML
+            #ABERTO O PHP PARA VERIFICAR SE A SESSÃO DO USUÁRIO ESTÁ ABERTA
+            #SE SESSÃO ABERTA, FECHA O PHP PARA USAR ELEMENTO HTML
                 if($nomeusuario != null){
-            ?>
-            <!--USO DO ELEMENTO HTML COM PHP INTERNO-->
-            <li class ="profile">Olá <?=strtoupper($nomeusuario)?></li>
-            <?php
-            #ABERTURA DE OUTRO PHP PARA CASO FALSO
-            }
-            else{
-                echo"<script>window.alert('USUARIO NÃO AUTENTICADO');window.location.href='login.php';</script>";
-            }
-            #FIM DO USO DO PHP PARA CONTINUAR O HTML
-            ?>
+                    ?>
+                    <!-- USO DO ELEMENTO HTML COM PHP INTERNO -->
+                    <li class="profile">OLÁ, <?=strtoupper($nomeusuario)?></li>
+                    <?php
+                    #ABERTURA DE OUTRO PHP PARA CASO FALSE
+                }
+                else{
+                    echo"<script>window.alert('USUÁRIO NÃO AUTENTICADO');window.location.href='login.php';</script>";
+                }
+                #FIM DO PHP PARA CONTINUAR MEU HTML
+                ?>
         </ul>
     </div>
-    
-
-    
 </body>
 </html>

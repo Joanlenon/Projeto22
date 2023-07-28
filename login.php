@@ -1,47 +1,58 @@
 <?php
-session_start();
-$nomeusuario;
+    #ABRE UMA VARIÁVEL DE SESSÃO
+    session_start();
+    $nomeusuario;
 
-include("conectadb.php");
+    #SOLICITA O ARQUIVO CONECTADB
+    include("conectadb.php");
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nome = $_POST['nome'];
-    $senha = $_POST['senha'];
+    #EVENTO APÓS O CLICK NO BOTÃO LOGAR
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $nome = $_POST['nome']; #recebe de um metodo post o que vier escrito no html
+        $senha = $_POST['senha'];
 
-    $sql = "SELECT COUNT(usu_id) FROM usuarios WHERE usu_nome = '$nome' AND usu_senha = '$senha' AND usu_ativo = 's'";
-    $retorno = mysqli_query($link, $sql);
+        #QUERY DE BANCO DE DADOS
+        $sql = "SELECT COUNT(usu_id) FROM usuarios WHERE usu_nome = '$nome' AND usu_senha = '$senha' AND usu_ativo = 's'";
+        $retorno = mysqli_query($link, $sql);  #o retorno abre uma conexão de query passando o link ($servidor, $banco, $usuario, $senha)
 
-    while ($tbl = mysqli_fetch_array($retorno)) {
-        $cont = $tbl[0];
+        #TODO RETORNO DO BANCO É RETORNADO EM ARRAY EM PHP
+        while($tbl = mysqli_fetch_array($retorno))
+        {
+            $cont = $tbl[0];
+        }
+
+        #VERIFICA SE O USUÁRIO EXISTE
+        #SE $CONT == 1 ELE EXISTE E FAZ LOGIN
+        #SE $CONT == 0 ELE NÃO EXISTE E O USUÁRIO NÃO ESTÁ CADASTRADO
+
+        if($cont == 1){
+            $sql = "SELECT * FROM usuarios WHERE usu_nome = '$nome' and usu_senha = '$senha' AND usu_ativo = 's'"; #verifica se está ativo além de existir
+            $_SESSION['nomeusuario'] = $nome;
+
+            #DIRECIONA USUÁRIO PARA ADM
+            echo"<script>window.location.href='admhome.php';</script>";
+        }
+        else{
+            echo"<script>window.alert('USUÁRIO OU SENHA INCORRETO');</script>";
+        }
     }
-
-    if ($cont == 1) {
-        $sql = "SELECT * FROM usuarios WHERE usu_nome = '$nome' AND usu_senha = '$senha' AND usu_ativo = 's'";
-        $_SESSION['nomeusuario'] = $nome;
-        echo "<script>window.location.href='admhome.php';</script>";
-        exit();
-    } else {
-        echo "<script>window.alert('USUÁRIO OU SENHA INCORRETO');</script>";
-    }
-}
 ?>
-
-<!DOCTYPE html>
+<!DOCTYPE html>   
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/estiloadm.css">
-    <title>Login Usuario</title>
+    <link rel= "stylesheet" href= "./css/estiloadm.css">
+    <title>LOGIN USUÁRIO</title>
 </head>
 <body>
-    <form action="login.php" method="post">
-        <h1>LOGIN DE USUARIO</h1>
+    <form action= "login.php" method= "post">
+        <h1>LOGIN DE USUÁRIO</h1>
         <input type="text" name="nome" placeholder="NOME" required>
         <p></p>
         <input type="password" name="senha" placeholder="SENHA" required>
-        <p><a href="./recuperarsenha.php">Esqueci minha senha!</a></p>
-        <input type="submit" name="login" value="Login">
+        <p></p>
+        <input type="submit" name="login" value="LOGIN">
     </form>
 </body>
 </html>
